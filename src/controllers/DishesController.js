@@ -65,7 +65,7 @@ class DishesController {
 
     const diskStorage = new DiskStorage();
     
-    if(!name ?? !description ?? !price){
+    if(!name || !description || !price){
       throw new AppError("É obrigatório dar um nome, uma descrição, um valor e informar os ingredientes do prato.");
     };
 
@@ -100,42 +100,37 @@ class DishesController {
 
     const diskStorage = new DiskStorage();
 
+    if(!name || !description || !price || !img){
+      throw new AppError("É obrigatório dar um nome, uma descrição, um valor e informar os ingredientes do prato.");
+    };
+
     const dish = await knex("dishes").where({ id }).first();
 
-    if(dish.image && img) {
+    if(dish.image) {
       diskStorage.deleteFile(dish.image);
     };
 
-    if(img) {
-      const imageName = await diskStorage.saveFile(img);
+      const filename = await diskStorage.saveFile(img);
       
       await knex("dishes").where({ id }).update({
         name,
         description,
         price,
         foodCategory,
-        image: imageName,
+        image: filename,
       });
-    } else {
-      await knex("dishes").where({ id }).update({
-        name,
-        description,
-        price,
-        foodCategory,
-      });
-    };
 
     await knex("ingredients").where({ dish_id: id }).del();
 
     const dishIngredients = ingredients.map(ingredient => {
       return {
         dish_id: id,
-        name,
+        name: ingredient,
       };
     });
 
     await knex("ingredients").insert(dishIngredients);
-    return response.json();
+    return response.status(201).json();
   }
 
   async show(request, response) {
