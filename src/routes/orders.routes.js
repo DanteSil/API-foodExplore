@@ -10,7 +10,7 @@ const ordersRoutes = Router();
 ordersRoutes.use(ensureAuthenticated);
 
 ordersRoutes.post("/", orderController.create);
-ordersRoutes.get("/", orderController.index);
-ordersRoutes.get("/:id", orderController.show);
+ordersRoutes.get("/:id", orderController.index);
+ordersRoutes.get("/", orderController.show);
 
 module.exports = ordersRoutes;
