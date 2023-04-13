@@ -72,7 +72,7 @@ This is a API Restful
 
 ```bash
 # Clone this repository
-$ git clone git@github.com:exodogurgel/food-explorer-backend.git
+$ git clone git@github.com:DanteSil/API-foodExplore.git
 _________________________________________________________
 # Access the project folder in your terminal
 $ cd API-foodExplore 
