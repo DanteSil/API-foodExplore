@@ -97,7 +97,7 @@ _________________________________________________________
 
 ```bash
 # Clone this repository
-$ git clone git@github.com:exodogurgel/food-explorer-frontend.git
+$ git clone git@github.com:DanteSil/Front-FoodExplore.git
 _________________________________________________________
 # Access the project folder in your terminal
 $ cd Front-FoodExplore
